@@ -4,6 +4,7 @@ import { MATERIAL_DEFINITIONS } from '../materialIntrospection/config'
 import PropertiesComponent, { type PropertyField } from './PropertiesComponent'
 import EnvironmentControl from './EnvironmentControl'
 import LightControl from './LightControl'
+import MaterialView from './MaterialView'
 import type { EnvironmentSettings, LightSettings } from './Scene3D'
 
 interface MaterialControlsProps {
@@ -170,6 +171,11 @@ export default function MaterialControls({
             </option>
           ))}
         </select>
+        {getDefinition(materialType) && (
+          <p className="material-description">
+            {getDefinition(materialType)?.description}
+          </p>
+        )}
       </div>
 
       <div className="control-group geometry-controls-group">
@@ -240,6 +246,8 @@ export default function MaterialControls({
       />
 
       <LightControl lights={lightProps} onLightsChange={onLightPropsChange} />
+
+      <MaterialView materialType={materialType} materialProps={localProps} />
 
     </div>
   )

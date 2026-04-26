@@ -1,0 +1,58 @@
+.material-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+}
+
+.material-view-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.material-view-mode-switch {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.material-view-mode-button {
+  border: 1px solid #b8c6da;
+  background: #f3f7fe;
+  color: #2f5f9a;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.material-view-mode-button.is-active {
+  background: #2f5f9a;
+  color: #fff;
+  border-color: #2f5f9a;
+}
+
+.material-view-hint {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+}
+
+.material-view-code-block {
+  margin: 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #dce1ea;
+  background: #0f172a;
+  color: #d9e2ff;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+

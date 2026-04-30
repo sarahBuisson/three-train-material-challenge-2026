@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import{Material}  from 'three'
 
 export type EditableFieldType = 'color' | 'number' | 'boolean'
 
@@ -37,14 +37,14 @@ export interface EditableMaterialField {
   defaultValue: EditableDefaultValue
 }
 
-export type MaterialFactory = () => THREE.Material
+export type MaterialFactory = () => Material
 
 export type ClassConstructor<
   TInstance = unknown,
   TArgs extends unknown[] = unknown[],
 > = new (...args: TArgs) => TInstance
 
-export type MaterialTarget = string | MaterialFactory | THREE.Material
+export type MaterialTarget = string | MaterialFactory | Material
 
 export type ParameterFieldHint = {
   key: string
@@ -58,7 +58,7 @@ export type ParameterFieldHint = {
 export interface MaterialDefinition {
   name: string
   description: string
-  factory: (param: undefined | any ) => THREE.Material
+  factory: (param: undefined | any ) => Material
   constructorParameterFactory?: () => any
   parameterFields?: ParameterFieldHint[]
   priorityFields?: string[]

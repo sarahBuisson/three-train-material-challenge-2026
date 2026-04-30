@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { MATERIAL_FACTORIES } from './config'
 import type { Vector2Value } from './types'
+import { Color, DoubleSide, type Material, ShaderMaterial, Texture, Vector2 } from 'three';
 
 function isVector2Value(value: unknown): value is Vector2Value {
   if (!value || typeof value !== 'object') {
@@ -14,14 +15,14 @@ function isVector2Value(value: unknown): value is Vector2Value {
 export function createMaterialFromType(
   materialType: string,
   props: Record<string, unknown>,
-  loadedTexturesByKey: Record<string, THREE.Texture> = {}
-): THREE.Material {
+  loadedTexturesByKey: Record<string, Texture> = {}
+): Material {
   const factory = MATERIAL_FACTORIES[materialType] ?? MATERIAL_FACTORIES.MeshStandardMaterial
   const material = factory()
   const templateRecord = material as unknown as Record<string, unknown>
 
   if ('side' in templateRecord) {
-    templateRecord.side = THREE.DoubleSide
+    templateRecord.side = DoubleSide
   }
 
   Object.entries(props).forEach(([key, value]) => {
@@ -29,7 +30,7 @@ export function createMaterialFromType(
       key === 'uniforms' &&
       value &&
       typeof value === 'object' &&
-      material instanceof THREE.ShaderMaterial
+      material instanceof ShaderMaterial
     ) {
       Object.entries(value as Record<string, unknown>).forEach(([uniformName, uniformValue]) => {
         const uniform = material.uniforms[uniformName]
@@ -37,8 +38,8 @@ export function createMaterialFromType(
           return
         }
 
-        if (uniform.value instanceof THREE.Color && typeof uniformValue === 'string') {
-          uniform.value = new THREE.Color(uniformValue)
+        if (uniform.value instanceof Color && typeof uniformValue === 'string') {
+          uniform.value = new Color(uniformValue)
           return
         }
 
@@ -84,12 +85,12 @@ export function createMaterialFromType(
 
     const templateValue = templateRecord[key]
     if (templateValue instanceof THREE.Color && typeof value === 'string') {
-      templateRecord[key] = new THREE.Color(value)
+      templateRecord[key] = new Color(value)
       return
     }
 
-    if (templateValue instanceof THREE.Vector2 && isVector2Value(value)) {
-      templateRecord[key] = new THREE.Vector2(value.x, value.y)
+    if (templateValue instanceof Vector2 && isVector2Value(value)) {
+      templateRecord[key] = new Vector2(value.x, value.y)
       return
     }
 

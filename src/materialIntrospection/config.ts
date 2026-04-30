@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import type { MaterialDefinition, MaterialFactory } from './types'
+import { MeshBasicMaterial, MeshMatcapMaterial } from 'three';
 
 
 export const MATERIAL_DEFINITIONS: MaterialDefinition[] = [
@@ -7,7 +8,7 @@ export const MATERIAL_DEFINITIONS: MaterialDefinition[] = [
     {
         name: 'MeshBasicMaterial',
         description: 'An unlit material for flat color and texture rendering.',
-        factory: (param) => new THREE.MeshBasicMaterial(param),
+        factory: (param) => new MeshBasicMaterial(param),
         parameterFields: [
             {key: 'color', type: 'color', defaultValue: '#ffffff'},
             {key: 'opacity', type: 'number', defaultValue: 1, min: 0, max: 1, step: 0.01},
@@ -100,7 +101,7 @@ export const MATERIAL_DEFINITIONS: MaterialDefinition[] = [
     {
         name: 'MeshMatcapMaterial',
         description: 'A material using a matcap texture for baked lighting look.',
-        factory: (param) => new THREE.MeshMatcapMaterial(param),
+        factory: (param) => new MeshMatcapMaterial(param),
         parameterFields: [
             {key: 'color', type: 'color', defaultValue: '#ffffff'},
             {key: 'flatShading', type: 'boolean', defaultValue: false},

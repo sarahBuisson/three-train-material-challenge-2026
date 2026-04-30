@@ -3,6 +3,7 @@ import { Environment, OrbitControls, useGLTF, useTexture } from '@react-three/dr
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { createMaterialFromType } from '../materialIntrospection'
+import type { GeometryGroup } from 'three';
 
 export type EnvironmentSource = 'preset' | 'files'
 export type EnvironmentPreset =
@@ -128,7 +129,7 @@ function GltfModel({
     scene.traverse((child) => {
       if (child instanceof THREE.Mesh && child.geometry?.groups?.length > 0) {
         const geometryGroups = (child.geometry as THREE.BufferGeometry).groups
-        geometryGroups.forEach((_, index: number) => {
+        geometryGroups.forEach((_:GeometryGroup, index: number) => {
           if (!seenGroupIndices.has(index)) {
             groups.push(`group_${index}`)
             seenGroupIndices.add(index)
